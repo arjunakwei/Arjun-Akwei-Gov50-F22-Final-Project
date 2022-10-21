@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
 author: "Arjun Akwei"
-description: "The Effect of EU Membership on National Liberalization"
+description: "The Effect of EU Membership On National Liberalization"
 output:
   distill::distill_article:
     self_contained: false
