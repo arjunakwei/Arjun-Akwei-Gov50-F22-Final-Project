@@ -1,7 +1,7 @@
 ---
 title: "Gov 50 Final Project"
-author: "Your Name Here"
-description: "My final project"
+author: "Arjun Akwei"
+description: "The Effect of EU Membership on National Liberalization"
 output:
   distill::distill_article:
     self_contained: false
@@ -11,4 +11,20 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to...
+I am interested in exploring how determining whether membership in a liberal international organization such as the EU has caused new member countries to liberalize politically in a significant way. Between 1990 and 2005 several former Soviet sphere countries were making the decision of whether or not to join the EU, and many EU members and allies hoped that their joining would promote democratization and liberalization. I am curious to assess whether such an impact was seen. 
+
+My plan is to curate a sample of countries from the "Eastern Bloc" that joined the EU in the same year, and map years spent in EU against their annual scores on the UN's Human Freedom Index. I would then conduct a difference in difference analysis using a sample of countries from that bloc that chose not to join the EU to determine the treatment effect of EU membership.
+
+**Sample of Eastern Bloc countries now in EU**  
+- Poland 2004  
+- Czech Republic 2004  
+- Estonia 2004  
+- Hungary 2004  
+- Slovakia 2004  
+**Sample of Eastern bloc countries NOT in EU**  
+- Albania  
+- Moldova  
+- Ukraine  
+- Belarus  
+- Georgia  
+
