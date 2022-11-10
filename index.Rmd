@@ -85,9 +85,9 @@ two_count
 ```
 
 ```{r classifying}
-HDI_classified <- HDI |>
-  mutate(EU = if_else(country = c("Poland", "Czechia", "Estonia", "Hungary", "Slovakia"), "Member","Non-Member")) |>
-  group_by(EU)
+#HDI_classified <- HDI |>
+  #mutate(EU = if_else(country = c("Poland", "Czechia", "Estonia", "Hungary", "Slovakia"), "Member","Non-Member")) |>
+  #group_by(EU)
 ```
 
 ```{r plot1}
