@@ -51,51 +51,61 @@ Ukraine <- read_csv("Ukraine.csv")
 
 Albania_slice <- Albania |>
   slice(19:37) |>
-  mutate(HDI_index = value) |>
-  select(c(key, HDI_index))
+  mutate(HDI_index = value,
+         country = "Albania") |>
+  select(c(key, HDI_index, country))
 Albania_slice
 
 country_slice <- function(country) {
   country_slice <- slice(country, 19:37) |>
     mutate(HDI_index = value) |>
     select(c(key, HDI_index))
-    #ADD row for country name
-    #CHANGE year row values to reflect time not just value
   return(country_slice)
 }
 
-Belarus_slice <- country_slice(Belarus)
-Czechia_slice <- country_slice(Czechia)
-Estonia_slice <- country_slice(Estonia)
-Georgia_slice <- country_slice(Georgia)
-Hungary_slice <- country_slice(Hungary)
-Moldova_slice <- country_slice(Moldova)
-Poland_slice <- country_slice(Poland)
-Slovakia_slice <- country_slice(Slovakia)
-Ukraine_slice <- country_slice(Ukraine)
+Belarus_slice <- country_slice(Belarus) |>
+  mutate(country = "Belarus")
+Czechia_slice <- country_slice(Czechia) |>
+  mutate(country = "Czechia")
+Estonia_slice <- country_slice(Estonia) |>
+  mutate(country = "Estonia")
+Georgia_slice <- country_slice(Georgia) |>
+  mutate(country = "Georgia")
+Hungary_slice <- country_slice(Hungary) |>
+  mutate(country = "Hungary")
+Moldova_slice <- country_slice(Moldova) |>
+  mutate(country = "Moldova")
+Poland_slice <- country_slice(Poland) |>
+  mutate(country = "Poland")
+Slovakia_slice <- country_slice(Slovakia) |>
+  mutate(country = "Slovakia")
+Ukraine_slice <- country_slice(Ukraine) |>
+  mutate(country = "Ukraine")
 ```
 
 ```{r joining}
-two_count <- inner_join(Albania_slice, Belarus_slice)
+two_count <- rbind(Albania_slice, Belarus_slice)
 two_count
-#ERROR
 
-#...
-#HDI <- inner_join(nine_count, Ukraine)
+HDI <- rbind(two_count, Czechia_slice, Estonia_slice, Georgia_slice, Hungary_slice, Moldova_slice, Poland_slice, Slovakia_slice, Ukraine_slice)
+HDI
+
 ```
 
 ```{r classifying}
-#HDI_classified <- HDI |>
-  #mutate(EU = if_else(country = c("Poland", "Czechia", "Estonia", "Hungary", "Slovakia"), "Member","Non-Member")) |>
-  #group_by(EU)
+HDI_classified <- HDI |>
+  mutate(EU = if_else(country %in% c("Poland", "Czechia", "Estonia", "Hungary", "Slovakia"), "Member","Non-Member"),
+         year = substring(key, 34,37)) |>
+  group_by(country,EU)
 ```
 
-```{r plot1}
+```{r fig.width = 11, fig.height = 10}
 comparative_graph <- HDI_classified |>
-  ggplot(aes(x = year, y = HDI_index)) +
-  geom_line(aes(color = member), stat = "identity")+ 
-  scale_fill_manual(values = c(Member = "blue", Non-member = "red"))+
+  ggplot(aes(x = year, y = HDI_index, color = EU)) +
+  geom_line(aes(group=country)) +
   labs(x = "Year", y = "HDI", title = "Comparative HDI Growth")
+
+comparative_graph
   
 
 ```
